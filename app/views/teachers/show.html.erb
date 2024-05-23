@@ -1,0 +1,88 @@
+
+<div class="container">
+
+  <%# first row for info and photo %>
+  <div class="show-container d-flex justify-content-between mt-3 flex-grow-1" style="max-height: 400px;">
+
+    <%# info card %>
+    <div class="my-card w-50">
+      <h2><%= @teacher.name %></h2>
+      <%= render 'shared/average_rating', reviewable_type: @teacher %>
+      <p class="mt-3"><%= @teacher.description %></p>
+    </div>
+    <%# photo %>
+      <% if @teacher.photo.attached? %>
+        <%= cl_image_tag @teacher.photo.key, class: "rounded shadowed w-50 mb-3", style:"object-fit: cover; object-position: top;" %>
+      <% end %>
+  </div>
+
+  <%# card for classes %>
+  <div class="my-card">
+    <h2>Classes</h2>
+    <div class="d-flex show-container flex-wrap">
+      <% @teacher.yoga_studio_teachers.each do |yoga_studio_relation| %>
+        <% yoga_studio_relation.yoga_classes.each do |yoga_class| %>
+          <% if yoga_class.photo.attached? %>
+            <%= link_to(yoga_class_path(yoga_class), class: "text-decoration-none") do %>
+              <div class="display-card rounded" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('<%= cl_image_path yoga_class.photo.key %>')">
+                <%= yoga_class.name %>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <%# card for studios %>
+  <div class="my-card mt-3">
+    <h2>Studios</h2>
+    <div class="d-flex show-container flex-wrap">
+      <% @teacher.yoga_studio_teachers.each do |yoga_studio_relation| %>
+        <% if yoga_studio_relation.yoga_studio.photos.attached? %>
+          <%= link_to(yoga_studio_path(yoga_studio_relation.yoga_studio), class: "text-decoration-none") do %>
+            <div class="display-card rounded" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('<%= cl_image_path yoga_studio_relation.yoga_studio.photos.first.key %>')">
+              <%= yoga_studio_relation.yoga_studio.name %>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <%# card for reviews %>
+  <div class="ratings my-card" data-controller="insert-in-list">
+    <h2><strong>Reviews</strong></h3>
+    <ul class="list-group mb-3" data-insert-in-list-target="items">
+    <% @teacher.reviews.each do |review| %>
+      <li class="list-group-item pt-3">
+
+        <%# Displaying the stars: %>
+        <%= render 'shared/star_rating', star_rating: review.rating %>
+
+        <div class="review-body d-flex justify-content-between align-items-end">
+          <p class="mt-3"><%= review.content %></p>
+          <%= link_to "Delete",
+          polymorphic_path(review),
+          data: {turbo_method: :delete, turbo_confirm: "Are you sure?"},
+          class: "btn-delete",
+          style: "white-space: nowrap; flex-shrink: 1;"
+          %>
+        </div>
+      </li>
+    <% end %>
+    </ul>
+
+    <% if user_signed_in? %>
+      <h3 class="border-top pt-3 mt-4"><strong>Create a new review:</strong></h3>
+      <div class="row">
+        <div class="col-xs-4">
+        <%= render "reviews/form", reviewable: @teacher, review: @review %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+
+
+</div>

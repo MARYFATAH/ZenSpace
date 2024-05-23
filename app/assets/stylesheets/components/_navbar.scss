@@ -1,0 +1,31 @@
+.navbar-lewagon {
+  justify-content: space-between;
+  background: $fourth-color;
+  position: sticky !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  color:$first-color;
+}
+
+.navbar-lewagon .navbar-collapse {
+  flex-grow: 0;
+}
+
+.navbar-lewagon .navbar-brand img {
+  width: 40px;
+}
+
+.navbar-font{
+  font-family:$headers-font;
+  font-size: 25px;
+}
+
+.navbar-font-color{
+  color: white;
+}
+
+.container-lg{
+  padding-top: 500px !important;
+}

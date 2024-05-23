@@ -1,0 +1,63 @@
+<%= render 'shared/filter_bar' %>
+
+
+<div class="d-flex flex-direction-column justify-content-center space-between-around align-middle">
+
+    <div class="col">
+      <div class=" d-flex justify-content-center mb-3 mt-3  ">
+        <div class="cards">
+          <% @yoga_classes.each do |yoga_class| %>
+            <div class="card-product  shadow-sm rounded-4" data-aos="zoom-in">
+                <%= link_to yoga_class, class: "h-100" do %>
+                  <% if yoga_class.photo.attached? %>
+                     <%= cl_image_tag yoga_class.photo.key, class: "" %>
+                  <% end %>
+                <%end%>
+              <div class="container">
+              <%= link_to yoga_class, class: "text-decoration-none text-reset" do %>
+                <div class=" border-bottom m-2"> <h4><%= yoga_class.name %></h4></div>
+                    <div class="d-flex justify-content-between align-items-end m-2">
+                      <p class="m-1"><i class="fa-solid fa-location-dot"></i> <%= yoga_class.yoga_studio_teacher.yoga_studio.address.split(",").first %> </strong></p>
+                      <p><i class="fa-solid fa-hourglass-half"></i> <%= yoga_class.duration_in_minutes %> minutes</p>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-end m-2">
+                      <p class="m-1"><i class="fa-solid fa-tag"> </i> <%= sprintf("%.2f", yoga_class.price) %>€</p>
+                      <p class="m-1"><i class="fa-solid fa-user-group"></i> <%= (yoga_class.capacity - yoga_class.bookings.size) %> / <%= yoga_class.capacity %> spaces left</p>
+
+                    </div>
+                    <div class="d-flex justify-content-between m-2">
+                      <p class="m-1"><i class="fa-solid fa-calendar-days"></i> <%= yoga_class.start_time.strftime("%d of %B, %Y") %></p>
+                      <p class="m-1"><i class="fa-solid fa-clock"></i> <%= yoga_class.start_time.strftime("%k:%M") %> - <%= yoga_class.end_time.strftime("%k:%M") %></p>
+                    </div>
+                     <div class="d-flex justify-content-between m-2">
+                      <p class="m-1"><i class="fa-solid fa-stairs"></i> <%= yoga_class.difficulty %></p>
+                      <p class="m-1"><i class="fa-solid fa-star"></i> <%= yoga_class.style %></p>
+                    </div>
+                    <div class="d-flex justify-content-between m-2">
+                      <p class="m-1"><i class="fa-solid fa-person"></i>  <%= yoga_class.yoga_studio_teacher.teacher.name %></p>
+                      <p class="m-1"><i class="fa-solid fa-house"></i> <%= yoga_class.yoga_studio_teacher.yoga_studio.name %></p>
+                    </div>
+                </div>
+              </div>
+              <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col">
+      <div style="width: 100%; height:100vh; position:sticky; top:155px;"
+      data-controller="map"
+      data-map-markers-value="<%= @markers.to_json %>"
+      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+      </div>
+    </div>
+
+
+    </div>
+  </div>
+  </div>
+</div>
+
+<%# '[{"lat": 51.5074, "lng": -0.1278, "info_window_html": "<p>London</p>"}, {"lat": 48.8566, "lng": 2.3522, "info_window_html": "<p>Paris</p>"}]' %>

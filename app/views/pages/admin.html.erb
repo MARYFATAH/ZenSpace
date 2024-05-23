@@ -1,0 +1,94 @@
+<div class="container">
+  <div class="d-flex justify-content-between align-items-center border-bottom mb-4 pb-3">
+    <h1 class="">Admin dashboard</h1>
+    <div class="admin-buttons">
+      <%= link_to "Create new yoga class", new_yoga_class_path, class: "btn btn-flat m-2" %><%= link_to "Create new teacher", new_teacher_path, class: "btn btn-flat m-2" %><%= link_to "Create new studio", new_yoga_studio_path, class: "btn btn-flat m-2" %>
+    </div>
+  </div>
+  <div class="">
+    <nav class="">
+      <div class="nav mt-2 mb-2 p-3 nav-pills btn-ghost mb-3" id="nav-tab" role="tablist">
+        <button class="nav-link rounded active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Yoga Classes</button>
+        <button class="nav-link rounded" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Yoga Studios</button>
+        <button class="nav-link rounded" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Teachers</button>
+      </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+        <div class="">
+          <%# <h4 class="mb-3 my-card"> Your yoga classes </h4> %><%# Creating a card for each yoga class: %>
+          <div class="row">
+            <%@yoga_classes.each do |yoga_class| %>
+              <div class="col-4">
+                <div class="my-card" data-controller="collapse">
+                  <div class="d-flex flex-column justify-content-between border-bottom pb-3 mb-3">
+                    <div class="d-flex justify-content-between align-items-center m-2">
+                      <h4><%= yoga_class.name %></h4><%if yoga_class.photo.attached? %><%= cl_image_tag yoga_class.photo.key, class: "avatar-admin", alt: "avatar-admin" %><%end %>
+                    </div><%# <div class="admin-buttons"> %><%= link_to "Edit",  edit_yoga_class_path(yoga_class), class: "btn btn-edit mt-2 mb-2" %><%= link_to "Delete", yoga_class_path(yoga_class), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-delete mt-2 mb-2" %><%# </div> %>
+                  </div><button class="btn btn-flat mt-2 mb-2 w-100" type="button" data-action="click-&gt;collapse#infoClick">More information</button>
+                  <div class="d-none" data-collapse-target="info" id="collapse-&lt;%=yoga_class.id%&gt;">
+                    <div class="m-2 p-2 d-flex flex-column">
+                      <div class="d-flex justify-content-between">
+                        <div class="class-info">
+                          <p><i class="fa-solid fa-calendar-days"></i> <%= yoga_class.start_time.strftime("%d of %B, %Y") %></p>
+                          <p><i class="fa-solid fa-clock"></i> <%= yoga_class.start_time.strftime("%k:%M") %> - <%= yoga_class.end_time.strftime("%k:%M") %></p>
+                          <p><i class="fa-solid fa-user-group"></i> <%= (yoga_class.capacity - yoga_class.bookings.size) %> out of <%= yoga_class.capacity %> spaces left</p>
+                        </div>
+                      </div><%# Show participants: %><a class="btn btn-flat m-2" data-action="click-&gt;collapse#buttonClick">Show participants</a>
+                      <div class="d-none" data-collapse-target="content">
+                        <%if yoga_class.bookings.present? %><%yoga_class.bookings.each do |booking| %>
+                        <p class="card m-2 p-2"><%= booking.user.email %></p><%end %><%else %>
+                        <p>No participants yet</p><%end %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <%end %>
+          </div>
+        </div><%# Yoga class card end %>
+      </div>
+      <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+        <div class="">
+          <div class="row">
+            <%# <h4 class=" mb-3 my-card d-flex justify-content-center"> Your yoga studios </h4> %><%# Creating a card for each yoga studio: %>
+            <%@yoga_studios.each do |yoga_studio| %>
+              <div class="col-4">
+                <div class="my-card" data-controller="collapse">
+                  <div class="d-flex flex-column justify-content-between border-bottom pb-3 mb-3">
+                    <div class="d-flex justify-content-between align-items-center m-2">
+                      <h4><%= yoga_studio.name %></h4><%if yoga_studio.photos.attached? %><%= cl_image_tag yoga_studio.photos.first.key, class: "avatar-admin", alt: "avatar-admin" %><%end %>
+                    </div><%# <div class="admin-buttons"> %><%= link_to "Edit", edit_yoga_studio_path(yoga_studio), class: "btn btn-edit mb-2 mt-2" %><%= link_to "Delete", yoga_studio_path(yoga_studio), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-delete mt-2 mb-2" %><%# </div> %>
+                  </div><button class="btn btn-flat mt-2 mb-2 w-100" type="button" data-action="click-&gt;collapse#infoClick">More information</button>
+                  <div class="d-none" data-collapse-target="info" id="collapse-&lt;%=yoga_studio.id%&gt;">
+                    <p><i class="fa-solid fa-location-dot"></i> <%= yoga_studio.address %></p><%# @yoga_studio_teacher = YogaStudioTeacher.new(yoga_studio: yoga_studio) %><%= simple_form_for(@yoga_studio_teacher) do |f| %><%= f.input :teacher_id, collection: Teacher.all, label: "Teacher name" %><%= f.hidden_field :yoga_studio_id, value: yoga_studio.id %><%= f.submit "Add teacher to this studio", class: "btn btn-flat" %><%end %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div><%# Yoga studio card end %>
+      </div>
+      <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
+        <div class="">
+          <div class="row">
+            <%# <h4 class="mb-3 my-card d-flex justify-content-center">Your teachers</h4> %>
+            <%# Creating a card for each teacher: %>
+            <%@teachers.each do |teacher| %>
+              <div class="col-4">
+                <div class="my-card">
+                  <div class="d-flex flex-column justify-content-between border-bottom pb-3 mb-3">
+                    <div class="d-flex justify-content-between align-items-center m-2">
+                      <h4><%= teacher.name %></h4><%if teacher.photo.attached? %><%= cl_image_tag teacher.photo.key, class: "avatar-admin", alt: "avatar-admin" %><%end %>
+                    </div><%# <div class="admin-buttons"> %><%= link_to "Edit", edit_teacher_path(teacher), class: "btn btn-edit m-2" %><%= link_to "Delete", teacher_path(teacher), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-delete m-2" %><%# </div> %>
+                  </div>
+                  <p><%= truncate(teacher.description, :length => 90) %></p>
+                </div>
+              </div>
+            <%end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

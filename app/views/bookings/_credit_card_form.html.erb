@@ -1,0 +1,102 @@
+<!-- Credit card form -->
+<section>
+  <div class="row">
+    <div class="col-md-8 mb-4">
+      <div class="my-card mb-4 rounded">
+        <div class="card-header py-3">
+        <h2 class="mb-0 pb-3 border-bottom">Biling details</h2>
+        </div>
+        <div class="card-body">
+          <%= simple_form_for(user, as: :user, url: user_path(user), html: { method: :patch }) do |u| %>
+          <%= hidden_field_tag "booking_id", @booking.id%>
+            <div class="row mb-4">
+              <div class="col">
+                <%= u.input :first_name %>
+              </div>
+              <div class="col">
+                <%= u.input :last_name %>
+              </div>
+            </div>
+              <%= u.input :company %>
+              <%= u.input :address %>
+              <%= u.input :phone %>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="checkoutForm1" />
+              <label class="form-check-label" for="checkoutForm1">
+                Shipping address is the same as my billing address
+              </label>
+            </div>
+            <div class="form-check mb-4">
+              <input class="form-check-input" type="checkbox" value="" id="checkoutForm2" checked />
+              <label class="form-check-label" for="checkoutForm2">
+                Save this information for next time
+              </label>
+            </div>
+            <hr>
+              <h5 class="mb-2">Payment</h5>
+              <div class="row mb-3">
+               <div class="col-3">
+                  <img src="https://kamboo-project.ngo/wp-content/uploads/2017/02/stripe_credit-card-logos.png" class="img-fluid" alt="Responsive image">
+                </div>
+              </div>
+              <div class="row mb-4">
+                <div class="col">
+                  <%= u.input :card_name, label: "Cardholder name"  %>
+                </div>
+                <div class="col">
+                  <%= u.input :card_number, label: "Card number"  %>
+                </div>
+              </div>
+              <div class="row mb-4">
+                <div class="col-6">
+                  <%= u.input :card_cvv, label: "CVV" %>
+                </div>
+                <div class="col-6">
+                  <%= u.input :card_expiration, label: "Expiration date"  %>
+                </div>
+              </div>
+              <div class="row">
+                <%= u.button :submit, "Pay Now", class: "btn-flat" %>
+              </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+
+    <%# Summary %>
+    <div class="col-md-4 mb-4">
+      <div class="my-card mb-4 rounded" style="position: sticky !important; top: 100px; !important;">
+        <div class="card-header py-3">
+          <h2 class="mb-0 pb-3 border-bottom">Summary</h2>
+        </div>
+       <div class="summary-details">
+        <div class="d-flex justify-content-between">
+          <p><i class="fa-solid fa-calendar-days"></i> <%= @booking.yoga_class.start_time.strftime("%d of %B, %Y") %></p>
+          <p><i class="fa-solid fa-clock"></i> <%= @booking.yoga_class.start_time.strftime("%k:%M") %> - <%= @booking.yoga_class.end_time.strftime("%k:%M") %></p>
+        </div>
+        <div class="d-flex justify-content-between">
+          <p><i class="fa-solid fa-location-dot"></i> <%= @booking.yoga_class.yoga_studio_teacher.yoga_studio.address.split(",").first %></p>
+          <p><i class="fa-solid fa-person"></i> <%= @booking.yoga_class.difficulty %></p>
+        </div>
+        <div class="d-flex justify-content-between">
+          <p><i class="fa-solid fa-hourglass-half"></i> <%= @booking.yoga_class.duration_in_minutes %> minutes</p>
+          <p><i class="fa-solid fa-star"></i> <%= @booking.yoga_class.style %></p>
+        </div>
+        <div class="d-flex justify-content-between">
+          <p><i class="fa-solid fa-person"></i>  <%= @booking.yoga_class.yoga_studio_teacher.teacher.name %></p>
+          <p><i class="fa-solid fa-house"></i> <%= @booking.yoga_class.yoga_studio_teacher.yoga_studio.name %></p>
+        </div>
+      </div>
+      <div class="list-group-item d-flex justify-content-between align-items-center border-top pt-3 mt-3 border-0 px-0 mb-3" style="font-size:24px;">
+        <div>
+          <strong>Price</strong>
+        </div>
+        <span><strong><%= sprintf("%.2f", yoga_class.price) %>€</strong></span>
+      </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Credit card form -->

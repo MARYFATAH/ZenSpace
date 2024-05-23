@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="mb-3 d-flex justify-content-md-around">
+   <div class="form-control bg-white p-5 rounded-4 border-0 shadow-sm">
+      <%= simple_form_for(@yoga_studio) do |ys| %>
+        <strong><h3 class="mb-4">Edit a yoga studio</h3></strong>
+        <%= ys.input :name %>
+        <%= ys.input :description %>
+        <%= ys.input :address %>
+        <%= ys.input :photos, as: :file, input_html: {multiple: true} %>
+        <div class="d-flex justify-content-between">
+          <%= ys.submit class:"btn-flat m-3 ml-0 " %>
+          <%= link_to "Back to all studios",  yoga_studios_path, class:"btn-flat m-3 mr-0 text-decoration-none" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

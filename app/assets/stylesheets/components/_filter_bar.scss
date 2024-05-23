@@ -1,0 +1,18 @@
+.filter-bar {
+  position: sticky;
+  top: 82px;
+  z-index: 2;
+  margin-top: -18px;
+  background-color: white;
+}
+
+.filters {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  height: 36px;
+}
+
+.filter-buttons {
+  gap: 5px;
+}

@@ -1,0 +1,10 @@
+<%= form_with url: yoga_classes_path, method: :get, class: "d-flex position-relative" do %>
+  <%= text_field_tag :query,
+    params[:query],
+    class: "form-control rounded",
+    placeholder: "Search for a yoga class, studio or teacher"
+  %>
+  <button name="button" type="submit" class="btn position-absolute" style="right: 3px; top: 4px;">
+    <i class="fas fa-search d-flex justify-content-center"></i>
+  </button>
+<% end %>

@@ -1,0 +1,106 @@
+<div class="container">
+  <%# Photo:: %>
+  <% if @yoga_class.photo.attached? %>
+    <%= cl_image_tag @yoga_class.photo.key, class: "carousel-slide d-block w-100" %>
+  <% end %>
+  <div class="overlay carousel-slide w-100 d-flex justify-content-center align-items-center">
+    <h1 class="text-white"><%= @yoga_class.name %></h1>
+  </div>
+
+  <%# Booking Card: %>
+  <div class="booking-card my-card d-flex justify-content-between mt-3">
+    <h2 class="booking-price"><strong><%= sprintf("%.2f", @yoga_class.price) %>€</strong></h2>
+    <%= simple_form_for [@yoga_class, @booking] do |f| %>
+      <%# f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
+      <%= f.input :yoga_class_id, as: :hidden, input_html: { value: @yoga_class.id } %>
+      <%= f.submit class: "btn-flat btn-booking", value: "Book Now" %>
+    <% end %>
+  </div>
+
+  <%# class info + map container %>
+  <div class="show-container d-flex justify-content-between mt-3">
+    <%# Info Card: %>
+    <div class="info-card my-card w-50">
+
+      <div class="short-details border-bottom pb-2">
+        <div class="d-flex justify-content-between">
+          <p><i class="fa-solid fa-calendar-days"></i> <%= @yoga_class.start_time.strftime("%d of %B, %Y") %></p>
+          <p><i class="fa-solid fa-clock"></i> <%= @yoga_class.start_time.strftime("%k:%M") %> - <%= @yoga_class.end_time.strftime("%k:%M") %></p>
+        </div>
+        <div class="d-flex justify-content-between">
+          <p><i class="fa-solid fa-user-group"></i> <%= (@yoga_class.capacity - @yoga_class.bookings.size) %> out of <%= @yoga_class.capacity %> spaces left</p>
+          <p><i class="fa-solid fa-stairs"></i><%= @yoga_class.difficulty %></p>
+        </div>
+        <div class="d-flex justify-content-between">
+          <p><i class="fa-solid fa-hourglass-half"></i> <%= @yoga_class.duration_in_minutes %> minutes</p>
+          <p><i class="fa-solid fa-star"></i> <%= @yoga_class.style %></p>
+        </div>
+      </div>
+      <p class="info-text mt-3"><%= @yoga_class.description %></p>
+    </div>
+
+    <%# Map Card: %>
+    <div class="w-50 mb-3">
+      <div style="width: 100%; height:100%;"
+      class="rounded shadowed"
+      data-controller="map"
+      data-map-markers-value="<%= @markers.to_json %>"
+      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+      </div>
+    </div>
+
+  </div>
+
+  <%# teacher+studio container %>
+  <div class="show-container d-flex justify-content-between">
+    <%# Teacher Card: %>
+        <div class="teacher-card my-card third flex-grow-1 d-flex flex-column">
+          <div class="card-content flex-grow-1">
+            <div class="teacher-card-header d-flex justify-content-between align-items-center border-bottom pb-3 mb-3">
+              <div class="d-flex flex-column">
+                <h2><strong>Teacher: </strong><%= @yoga_class.yoga_studio_teacher.teacher.name %></h2>
+                <%= render 'shared/average_rating', reviewable_type: @yoga_class.yoga_studio_teacher.teacher %>
+              </div>
+              <div class="teacher-avatar">
+                <% if @yoga_class.yoga_studio_teacher.teacher.photo.attached? %>
+                  <%= cl_image_tag @yoga_class.yoga_studio_teacher.teacher.photo.key, class: "avatar-large" %>
+                <% end %>
+              </div>
+            </div>
+            <div class="teacher-card-body flex-grow-1">
+              <p><%= truncate(@yoga_class.yoga_studio_teacher.teacher.description, :length => 250) %></p>
+            </div>
+          </div>
+          <div class="mt-auto">
+            <%= link_to "View Teacher", teacher_path(@yoga_class.yoga_studio_teacher.teacher), class: "btn-flat d-block w-100" %>
+          </div>
+        </div>
+
+
+    <%# Studio Card %>
+    <div class="studio-card my-card third flex-grow-1 d-flex flex-column">
+      <div class="studio-card-header d-flex justify-content-between align-items-center border-bottom pb-3 mb-3">
+        <div class="d-flex flex-column">
+          <h2><strong>Studio: </strong><%= @yoga_class.yoga_studio_teacher.yoga_studio.name %></h2>
+          <%= render 'shared/average_rating', reviewable_type: @yoga_class.yoga_studio_teacher.yoga_studio %>
+        </div>
+        <div class="studio-avatar">
+          <% if @yoga_class.yoga_studio_teacher.yoga_studio.photos.attached? %>
+            <%= cl_image_tag @yoga_class.yoga_studio_teacher.yoga_studio.photos.first.key, class: "avatar-large" %>
+          <% end %>
+        </div>
+      </div>
+      <div class="studio-card-body flex-grow-1">
+        <p class="border-bottom pb-3 mb-3"><i class="fa-solid fa-location-dot"></i> <%= @yoga_class.yoga_studio_teacher.yoga_studio.address %></p>
+        <p><%= truncate(@yoga_class.yoga_studio_teacher.yoga_studio.description, :length => 90) %></p>
+      </div>
+      <div class="mt-auto">
+        <%= link_to "View Studio", yoga_studio_path(@yoga_class.yoga_studio_teacher.yoga_studio), class: "btn-flat d-block w-100" %>
+      </div>
+    </div>
+    <% content_for :meta_title, "#{@yoga_class.name} is on #{DEFAULT_META["meta_product_name"]}" %>
+    <% content_for :meta_description, @yoga_class.description %>
+    <% content_for :meta_image, cl_image_path(@yoga_class.photo.key) %>
+
+
+</div>

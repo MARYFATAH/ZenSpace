@@ -1,0 +1,96 @@
+<!-- Hero -->
+<div class="p-5 text-center bg-image rounded-3" style="background-image: url('https://wallpapercave.com/wp/wp3157182.jpg'); height: 100vh; width: 100vw; top: 0px; background-size: cover;">
+  <div style="background-color: rgba(0,0,0,0.5); width: 100vw; height: 100vh; position: absolute; top: 0px; left:0px;">
+    <!-- Log in button -->
+
+  <div class="d-flex justify-content-between align-items-center">
+    <%= image_tag "zenspacewhite.png", class:"img-logo" %>
+    <div class="mx-3"><%= render "shared/menue" %></div>
+    </div>
+
+    <!-- Log in button -->
+      <div class="d-flex justify-content-center align-items-top margin-home h-50">
+        <div class="text-light" style="width: 800px;">
+          <!-- Slogan text animation -->
+          <h1 class="mb-4">Find Your Next <span class="mov"> </span>Yoga Class</h1>
+          <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+            <script>
+              var typed = new Typed(".mov",{
+              strings: [,"Hatha", "Vinyasa", "Ashtanga", "Iyengar", "Hot", "Kundalini", "Restorative", "Yin"],
+              typeSpeed: 200,
+              backSpeed: 200,
+              loop: true
+            })
+            </script>
+          <!-- Slogan text animation -->
+          <!-- Search Bar  -->
+          <div class="w-75 margin-auto">
+            <%= render "shared/search_bar" %>
+          </div>
+          <!-- Search Bar -->
+          <div class="filter-buttons d-flex justify-content-center gap-2 mt-3">
+            <%= link_to "All Classes", yoga_classes_path, class: "btn-flat" %>
+            <%= link_to "Hatha", yoga_classes_path(style: "Hatha"), class: "btn-flat" %>
+            <%= link_to "Vinyasa", yoga_classes_path(style: "Vinyasa"), class: "btn-flat" %>
+            <%= link_to "Ashtanga", yoga_classes_path(style: "Ashtanga"), class: "btn-flat" %>
+            <%= link_to "Yin", yoga_classes_path(style: "Yin"), class: "btn-flat" %>
+            <%= link_to "Hot", yoga_classes_path(style: "Hot"), class: "btn-flat" %>
+          </div>
+
+        </div>
+      </div>
+  </div>
+  <div class="wave-bottom wave-fill wave1">
+    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="shape-fill"></path>
+    </svg>
+</div>
+</div>
+<!-- Hero -->
+<!-- Most Popular Studios + cards -->
+
+<h2 class="text-center mt-2">Most Popular Yoga Classes</h2>
+<div class="cards container text-center p-3">
+  <div class="d-flex flex-direction-column justify-content-center space-between-around align-middle m-3">
+    <% @random_yoga_classes.each do |yoga_class| %>
+      <%= link_to yoga_class, class: "card-product-home m-2 text-decoration-none text-reset" do %>
+        <div class="card-product card-product-home align-item-center shadow-sm rounded-4 m-2" data-aos="zoom-in">
+          <%#= link_to yoga_class, class: "h-100 " do %>
+            <% if yoga_class.photo.attached? %>
+              <%= cl_image_tag yoga_class.photo.key, class: "img-home" %>
+            <% end %>
+          <%# end %>
+          <%#= link_to yoga_class, class: "text-decoration-none text-reset" do %>
+            <div class="card-body m-2 ">
+              <div class="border-bottom ">
+                <h5 class="mb-3"><%= yoga_class.name %></h5>
+              </div>
+              <div class="d-flex justify-content-start m-2">
+                <p class="text-start"><i class="fa-solid fa-location-dot"></i> <%= yoga_class.yoga_studio_teacher.yoga_studio.address.split(",").first %></p>
+              </div>
+              <div class="d-flex justify-content-between m-2">
+                <p class=""><i class="fa-solid fa-calendar-days"></i> <%= yoga_class.start_time.strftime("%d of %B, %Y") %></p>
+              </div>
+              <div class="d-flex justify-content-between m-2">
+                <p class=""><i class="fa-solid fa-clock"></i> <%= yoga_class.start_time.strftime("%k:%M") %> - <%= yoga_class.end_time.strftime("%k:%M") %></p>
+              </div>
+            </div>
+          <%# end %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+<!-- Most Popular Studios section + cards -->
+
+<%= render "testimonials" %>
+
+<h1 class="text-center mb-4">Find a Class Nearby</h1>
+<div class="show-map mb-5" data-aos="zoom-in">
+  <div style="width: 80%; height: 100%; margin: 0 auto;"
+    class="rounded shadowed"
+    data-controller="map"
+    data-map-markers-value="<%= @markers.to_json %>"
+    data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+  </div>
+</div>

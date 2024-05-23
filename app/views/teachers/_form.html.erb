@@ -1,0 +1,12 @@
+<div class="form-control bg-white p-5 rounded-4 border-0 shadow-sm">
+  <%= simple_form_for(@teacher) do |t| %>
+    <strong><h3 class="mb-4">Submit a teacher</h3></strong>
+    <%= t.input :name %>
+    <%= t.input :description %>
+    <%= t.input :photo, as: :file %>
+    <div class="d-flex justify-content-between">
+      <%= t.submit class:"btn-flat m-3 ml-0 " %>
+      <%= link_to "Back to the admin page",  admin_path, class:"btn-flat m-3 mr-0 text-decoration-none" %>
+    </div>
+  <% end %>
+</div>

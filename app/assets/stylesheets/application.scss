@@ -1,0 +1,53 @@
+// Graphical variables
+@import "config/fonts";
+@import "config/colors";
+@import "config/bootstrap_variables";
+
+// External libraries
+@import "bootstrap/scss/bootstrap";
+@import "font-awesome";
+@import "star-rating.js/dist/star-rating.css";
+@import "flatpickr/dist/flatpickr.css";
+
+// Your CSS partials
+@import "components/index";
+@import "pages/index";
+
+.rounded {
+  border-radius: 12px !important;
+}
+
+img {
+  object-fit: cover !important;
+}
+
+.shadowed {
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
+}
+
+.third {
+  width: 33.33%;
+}
+
+.w-49 {
+  width: 49%;
+}
+
+.margin-auto {
+  margin: 0 auto;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 12px;
+  border-top-left-radius: 12px;
+}
+
+.list-group-item:last-child {
+  border-bottom-right-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+.fas,
+.fa-solid {
+  color: #9f8971 !important;
+}

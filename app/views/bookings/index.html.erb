@@ -1,0 +1,32 @@
+<div class="container">
+  <h1>All Your Future Bookings:</h1>
+  <div class="d-flex justify-content-between flex-wrap">
+    <% @bookings.each do |booking| %>
+      <div class="my-card w-49">
+        <div class="d-flex justify-content-between align-items-center border-bottom pb-3 mb-3">
+          <%# add photo of the yoga class %>
+          <%= cl_image_tag booking.yoga_class.photo.key, class: "avatar-large" %>
+          <h2><%= booking.yoga_class.name %></h2>
+          <%= link_to "Cancel booking", booking_path(booking), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-delete" %>
+        </div>
+        <div class="d-flex justify-content-between">
+          <p><i class="fa-solid fa-calendar-days"></i> <%= booking.yoga_class.start_time.strftime("%d of %B, %Y") %></p>
+          <p><i class="fa-solid fa-clock"></i> <%= booking.yoga_class.start_time.strftime("%k:%M") %> - <%= booking.yoga_class.end_time.strftime("%k:%M") %></p>
+        </div>
+        <div class="d-flex justify-content-between">
+          <p><i class="fa-solid fa-location-dot"></i> <%= booking.yoga_class.yoga_studio_teacher.yoga_studio.address %></p>
+          <p><i class="fa-solid fa-person"></i> <%= booking.yoga_class.difficulty %></p>
+        </div>
+        <div class="d-flex justify-content-between">
+          <p><i class="fa-solid fa-hourglass-half"></i> <%= booking.yoga_class.duration_in_minutes %> minutes</p>
+          <p><i class="fa-solid fa-star"></i> <%= booking.yoga_class.style %></p>
+        </div>
+        <div class="d-flex justify-content-between">
+            <p><i class="fa-solid fa-person"></i>  <%= booking.yoga_class.yoga_studio_teacher.teacher.name %></p>
+            <p><i class="fa-solid fa-house"></i> <%= booking.yoga_class.yoga_studio_teacher.yoga_studio.name %></p>
+          </div>
+      </div>
+    <% end %>
+  </div>
+
+</div>

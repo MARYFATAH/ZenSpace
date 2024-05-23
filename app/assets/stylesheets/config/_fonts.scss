@@ -1,0 +1,20 @@
+// Import Google fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,700|Work+Sans:400,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Edu+NSW+ACT+Foundation&family=Open+Sans:wght@300&family=Roboto+Condensed:wght@300&family=Roboto:ital,wght@0,400;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Edu+NSW+ACT+Foundation&family=Montserrat:wght@700&family=Open+Sans:wght@300&family=Poppins&family=Roboto+Condensed:wght@300&family=Roboto:ital,wght@0,400;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Edu+NSW+ACT+Foundation&family=Merriweather:wght@300;400&family=Montserrat:wght@700&family=Open+Sans:wght@300&family=Poppins&family=Roboto+Condensed:wght@300&family=Roboto:ital,wght@0,400;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Edu+NSW+ACT+Foundation&family=Merriweather:wght@300;400&family=Montserrat:wght@700&family=Noto+Serif+Lao&family=Open+Sans:wght@300&family=Poppins&family=Roboto+Condensed:wght@300&family=Roboto+Slab&family=Roboto:ital,wght@0,400;1,900&display=swap');
+
+// Define fonts for body and headers
+$body-font: 'Roboto Slab', serif;
+$headers-font: 'Merriweather', sans-serif;
+
+// To use a font file (.woff) uncomment following lines
+// @font-face {
+//   font-family: "Font Name";
+//   src: font-url('FontFile.eot');
+//   src: font-url('FontFile.eot?#iefix') format('embedded-opentype'),
+//        font-url('FontFile.woff') format('woff'),
+//        font-url('FontFile.ttf') format('truetype')
+// }
+// $my-font: "Font Name";

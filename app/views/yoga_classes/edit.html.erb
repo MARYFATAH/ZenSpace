@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="mb-3 d-flex justify-content-md-around">
+   <div class="form-control bg-white p-5 rounded-4 border-0 shadow-sm">
+  <%= simple_form_for(@yoga_class) do |yc| %>
+    <strong><h3 class="mb-4">Edit a yoga class</h3></strong>
+    <%= yc.input :name %>
+    <%= yc.input :description %>
+    <%= yc.input :price %>
+    <%= yc.input :start_time %>
+    <%= yc.input :end_time %>
+    <%= yc.input :capacity %>
+    <%= yc.input :yoga_studio, collection: YogaStudio.all, label: "Yoga Studio Name", prompt: "Select a yoga studio" %>
+    <%= yc.input :teacher, collection: Teacher.all, label: "Teacher Name", prompt: "Select a teacher" %>
+    <%= yc.input :difficulty, :collection => ["Beginner", "Intermediate", "Advanced", "All Levels"]  %>
+    <%= yc.input :style, :collection =>%w[Hatha Vinyasa Ashtanga Iyengar Hot Kundalini Restorative Yin Power Anusara Prenatal Postnatal Jivamukti Other]  %>
+    <%= yc.input :photo, as: :file %>
+    <div class="d-flex justify-content-between">
+      <%= yc.submit class:"btn-flat m-3 ml-0 " %>
+      <%= link_to "Back to all classes",  yoga_classes_path, class:"btn-flat m-3 mr-0 text-decoration-none" %>
+    </div>
+  <% end %>
+</div>
+  </div>
+</div>

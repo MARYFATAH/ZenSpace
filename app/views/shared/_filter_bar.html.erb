@@ -1,0 +1,122 @@
+<div class="filter-bar border-bottom pb-2 pt-2">
+  <div class="container">
+    <%= form_tag yoga_classes_path, method: :get, class: "dropdown filters" do %>
+
+    <%# Start of filter bar form %>
+
+
+      <%# Style %>
+      <button class="btn-filter dropdown-toggle" type="button" id="style-dropdown" data-bs-toggle="dropdown" aria-bs-haspopup="true" aria-bs-expanded="false">
+        <i class="fa-solid fa-star"></i> Style
+      </button>
+      <div class="dropdown-menu p-3 rounded" aria-labelledby="style-dropdown" data-bs-auto-close="false">
+        <%# Dropdown Options %>
+        <% %w[Hatha Vinyasa Ashtanga Iyengar Hot Kundalini Restorative Yin Power Anusara Prenatal Postnatal Jivamukti Other].each do |yoga_style| %>
+          <div class="form-check">
+            <%= check_box_tag "style[]", "#{yoga_style}", params[:style]&.include?("#{yoga_style}"), id: "#{yoga_style}-checkbox", class: "form-check-input" %>
+            <%= label_tag "#{yoga_style}-checkbox", "#{yoga_style}", class: "form-check-label", data: { bs_toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" }, onclick: "toggleCheckbox('#{yoga_style}-checkbox'); event.stopPropagation(); return false;" %>
+          </div>
+        <% end %>
+      </div>
+
+      <%# Difficulty %>
+      <button class="btn-filter dropdown-toggle" type="button" id="difficulty-dropdown" data-bs-toggle="dropdown" aria-bs-haspopup="true" aria-bs-expanded="false">
+        <i class="fa-solid fa-person"></i> Difficulty
+      </button>
+
+      <div class="dropdown-menu p-3 rounded" aria-labelledby="difficulty-dropdown">
+
+        <%# Dropdown Options %>
+        <% ["Beginner", "Intermediate", "Advanced", "All Levels"].each do |difficulty| %>
+          <div class="form-check">
+            <%= check_box_tag "difficulty[]", "#{difficulty}", params[:difficulty]&.include?("#{difficulty}"), id: "#{difficulty}-checkbox", class: "form-check-input" %>
+            <%= label_tag "#{difficulty}-checkbox", "#{difficulty}", class: "form-check-label", data: { bs_toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" }, onclick: "toggleCheckbox('#{difficulty}-checkbox'); event.stopPropagation(); return false;" %>
+          </div>
+        <% end %>
+
+      </div>
+
+
+
+
+      <%# Duration %>
+      <button class="btn-filter dropdown-toggle" type="button" id="duration-dropdown" data-bs-toggle="dropdown" aria-bs-haspopup="true" aria-bs-expanded="false">
+        <i class="fa-solid fa-hourglass-half"></i> Duration
+      </button>
+
+      <div class="dropdown-menu p-3 rounded" aria-labelledby="duration-dropdown">
+        <div class="form-group">
+          <%= label_tag "duration-min", "Min Duration (minutes)", class: "form-label" %>
+          <%= text_field_tag "duration_min", params[:duration_min], class: "form-control", type: "number", min: 0, step: 1, pattern: "[0-9]*", onkeypress: "return event.charCode >= 48 && event.charCode <= 57"  %>
+        </div>
+        <div class="form-group">
+          <%= label_tag "duration-max", "Max Duration (minutes)", class: "form-label" %>
+          <%= text_field_tag "duration_max", params[:duration_max], class: "form-control", type: "number", min: 0, step: 1, pattern: "[0-9]*", onkeypress: "return event.charCode >= 48 && event.charCode <= 57"  %>
+        </div>
+      </div>
+
+
+
+
+      <%# Price %>
+      <button class="btn-filter dropdown-toggle" type="button" id="price-dropdown" data-bs-toggle="dropdown" aria-bs-haspopup="true" aria-bs-expanded="false">
+        <i class="fa-solid fa-tag"></i> Price
+      </button>
+
+      <div class="dropdown-menu p-3" aria-labelledby="price-dropdown">
+        <div class="form-group">
+          <%= label_tag "price-min", "Min Price (€)", class: "form-label" %>
+          <%= text_field_tag "price_min", params[:price_min], class: "form-control", type: "number", min: 0, step: 1, pattern: "[0-9]*", onkeypress: "return event.charCode >= 48 && event.charCode <= 57" %>
+        </div>
+        <div class="form-group">
+          <%= label_tag "price-max", "Max Price (€)", class: "form-label" %>
+          <%= text_field_tag "price_max", params[:price_max], class: "form-control", type: "number", min: 0, step: 1, pattern: "[0-9]*", onkeypress: "return event.charCode >= 48 && event.charCode <= 57" %>
+        </div>
+      </div>
+
+        <%# Date / Time %>
+        <button class="btn-filter dropdown-toggle" type="button" id="date-range-dropdown" data-bs-toggle="dropdown" aria-bs-haspopup="true" aria-bs-expanded="false">
+          <i class="fa-solid fa-calendar-days"></i> Date Range
+        </button>
+
+        <div class="dropdown-menu p-3 rounded" aria-labelledby="date-range-dropdown" data-controller="flatpickr">
+          <div class="form-group">
+            <%= label_tag "start-date", "Start Date", class: "form-label" %>
+            <%= text_field_tag "start_date", params[:start_date], class: "form-control flatpickr-input", id: "start-date", data: { flatpickr_target: "startTime" } %>
+          </div>
+          <div class="form-group">
+            <%= label_tag "end-date", "End Date", class: "form-label" %>
+            <%= text_field_tag "end_date", params[:end_date], class: "form-control flatpickr-input", id: "end-date", data: { flatpickr_target: "endTime" } %>
+          </div>
+        </div>
+
+      <%# Distance %>
+      <button class="btn-filter dropdown-toggle" type="button" id="distance-dropdown" data-bs-toggle="dropdown" aria-bs-haspopup="true" aria-bs-expanded="false">
+        <i class="fa-solid fa-location-dot"></i> Distance
+      </button>
+      <div class="dropdown-menu p-3" aria-labelledby="distance-dropdown">
+        <div class="form-group">
+          <%= label_tag "address", "Address", class: "form-label" %>
+          <%= text_field_tag "address", params[:address], class: "form-control", type: "text" %>
+        </div>
+        <div class="form-group">
+          <%= label_tag "max_distance", "Max Distance (km)", class: "form-label" %>
+          <%= text_field_tag "max_distance", params[:max_distance], class: "form-control", type: "number", min: 0, step: 1, pattern: "[0-9]*", onkeypress: "return event.charCode >= 48 && event.charCode <= 57" %>
+        </div>
+      </div>
+
+
+
+    <%# End of filter bar form %>
+    <%= submit_tag "Filter", class: "btn-flat" %>
+    <%= link_to "Reset Filters", yoga_classes_path, class: "btn-delete btn-reset" %>
+    <% end %>
+  </div>
+</div>
+
+<script>
+function toggleCheckbox(checkboxId) {
+  var checkbox = document.getElementById(checkboxId);
+  checkbox.checked = !checkbox.checked;
+}
+</script>

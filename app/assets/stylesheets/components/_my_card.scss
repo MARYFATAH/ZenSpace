@@ -1,0 +1,36 @@
+.my-card {
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
+  border-radius: 12px;
+  padding: 20px;
+  background-color: white;
+  margin-bottom: 1rem !important;
+  color: $first-color;
+}
+
+.show-container {
+  gap: 15px;
+}
+
+.display-card {
+  height: 160px;
+  width: 210px;
+  color: white;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 5px;
+  text-align: center;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+}
+
+.bg-color{
+  background-color: $fourth-color;
+}

@@ -1,0 +1,59 @@
+// Specific CSS for your home-page.
+.margin-home{
+  margin-top: 200px;
+}
+
+.gradient-custom {
+  background: radial-gradient($second-color, $fourth-color);
+}
+.carousel-dark .carousel-indicators [data-bs-target] {
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+}
+
+/* Curved bg with SVG via https://www.shapedivider.app/ */
+
+.wave-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.wave-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.wave-fill .shape-fill {
+  fill: #F4F4F4;
+}
+
+.wave1 svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 63px;
+}
+
+.wave2 svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 51px;
+  transform: rotateY(180deg);
+}
+
+.wave3 svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 114px;
+}

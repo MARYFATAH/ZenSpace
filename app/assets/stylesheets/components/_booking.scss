@@ -1,0 +1,9 @@
+.booking-price {
+  font-size: 35px !important;
+  margin-top: 0.9rem;
+}
+
+// Hiding the hidden fields of the booking form
+.mb-3.hidden.booking_yoga_class_id, .mb-3.hidden.booking_user_id {
+  display: none;
+}

@@ -1,0 +1,21 @@
+
+  <div class="card">
+    <div>
+      <%= link_to yoga_class, class:"card-img-top card-body" do %>
+        <% if yoga_class.photo.attached? %>
+         <%= cl_image_tag yoga_class.photo.key, class: "img-map shadow-sm  m-3 bg-white rounded-4" %>
+        <% end %>
+      <%end%>
+      <div class=" border-bottom m-2"> <h4><%= yoga_class.name %></h4></div>
+    
+        <div class="d-flex justify-content-between align-items-end m-2">
+          <p class="m-1"><i class="fa-solid fa-tag"> </i> <%= yoga_class.price %> <i class="fa-solid fa-euro-sign"></i></p>
+          <p class="m-1"><i class="fa-solid fa-user-group"></i> <%= (yoga_class.capacity - yoga_class.bookings.size) %> / <%= yoga_class.capacity %> spaces left</p>
+        </div>
+        <div class="d-flex justify-content-between align-items-end m-2">
+          <p class="m-1"><i class="fa-solid fa-person"></i> <%= yoga_class.difficulty %></p>
+          <p class="m-1"><i class="fa-solid fa-star"></i> <%= yoga_class.style %></p>
+        </div>
+      </div>
+    </div>
+</div>

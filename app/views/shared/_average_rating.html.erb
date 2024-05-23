@@ -1,0 +1,11 @@
+<% sum = 0 %>
+<% reviewable_type.reviews.each do |review| %>
+  <% if reviewable_type.reviews.size > 0 %>
+    <% sum += review.rating %>
+  <% end %>
+<% end %>
+<% if reviewable_type.reviews.size > 0 %>
+  <%= render 'shared/star_rating', star_rating: (sum / reviewable_type.reviews.size).round %>
+<% else %>
+  <%= render 'shared/star_rating', star_rating: 0 %>
+<% end %>
