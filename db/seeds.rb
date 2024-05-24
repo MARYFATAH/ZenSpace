@@ -289,7 +289,7 @@ file = URI.open("https://concreteplayground.com/content/uploads/2017/07/Yoga213-
 yoga_studio8.photos.attach(io: file, filename: "#{yoga_studio8.name}#{rand(1..100)}.png", content_type: "image/png")
 file = URI.open("https://cdn.concreteplayground.com/content/uploads/2015/11/Yoga-213-Hip-Hop-Richmond-Melbourne-01-1920x1080.jpeg")
 yoga_studio8.photos.attach(io: file, filename: "#{yoga_studio8.name}#{rand(1..100)}.png", content_type: "image/png")
-file = URI.open("http://amodernwayfarer.files.wordpress.com/2013/05/yoga-123-4.jpg")
+file = URI.open("https://cdn.concreteplayground.com/content/uploads/2015/11/Yoga-213-Hip-Hop-Richmond-Melbourne-01-1920x1080.jpeg")
 yoga_studio8.photos.attach(io: file, filename: "#{yoga_studio8.name}#{rand(1..100)}.png", content_type: "image/png")
 
 yoga_studio8.save!
@@ -302,7 +302,7 @@ yoga_studio9 = YogaStudio.new(
   user: user2
 )
 
-file = URI.open("https://img.theculturetrip.com/wp-content/uploads/2017/04/003-133_bear.jpg")
+file = URI.open("https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1d/ec/f0/e6/surf-spirit.jpg?w=1400&h=-1&s=1")
 yoga_studio9.photos.attach(io: file, filename: "#{yoga_studio9.name}#{rand(1..100)}.png", content_type: "image/png")
 file = URI.open("https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1d/ec/f0/e6/surf-spirit.jpg?w=1400&h=-1&s=1")
 yoga_studio9.photos.attach(io: file, filename: "#{yoga_studio9.name}#{rand(1..100)}.png", content_type: "image/png")
@@ -940,7 +940,7 @@ yoga_class11 = YogaClass.new(
   user: user2
 )
 
-file = URI.open("https://www.besthealthmag.ca/wp-content/uploads/2020/02/prenatal-yga-poses.jpg?resize=700,466")
+file = URI.open("https://www.epyogaeugene.com/wp-content/uploads/2022/03/postnatal_mum_baby_yoga-1024x576-1.png")
 yoga_class11.photo.attach(io: file, filename: "#{rand(1..1000000)}.png", content_type: "image/png")
 
 yoga_class11.save!
@@ -1015,7 +1015,7 @@ yoga_class15 = YogaClass.new(
   user: user3
 )
 
-file = URI.open("https://i0.wp.com/www.yogabasics.com/yogabasics2017/wp-content/uploads/2014/12/gentle-yoga-class.jpeg")
+file = URI.open("https://www.epyogaeugene.com/wp-content/uploads/2022/03/postnatal_mum_baby_yoga-1024x576-1.png")
 yoga_class15.photo.attach(io: file, filename: "#{rand(1..1000000)}.png", content_type: "image/png")
 
 yoga_class15.save!
@@ -1233,7 +1233,7 @@ yoga_class27 = YogaClass.new(
   user: user2
 )
 
-file = URI.open("https://www.fitnessfirst.com.sg/-/media/project/evolution-wellness/fitness-first/south-east-asia/malaysia/classes/gentle-flow-yoga/gentle-flow-yoga-class-malaysia.jpg")
+file = URI.open("https://www.epyogaeugene.com/wp-content/uploads/2022/03/postnatal_mum_baby_yoga-1024x576-1.png")
 yoga_class27.photo.attach(io: file, filename: "#{rand(1..1000000)}.png", content_type: "image/png")
 
 yoga_class27.save!
@@ -1251,7 +1251,7 @@ yoga_class28 = YogaClass.new(
   user: user3
 )
 
-file = URI.open("https://fortemaustralia.org.au/wp-content/uploads/2023/01/WordPress-Featured-Image-42.png")
+file = URI.open("https://www.epyogaeugene.com/wp-content/uploads/2022/03/postnatal_mum_baby_yoga-1024x576-1.png")
 yoga_class28.photo.attach(io: file, filename: "#{rand(1..1000000)}.png", content_type: "image/png")
 
 yoga_class28.save!
@@ -1341,7 +1341,7 @@ yoga_class33 = YogaClass.new(
   user: user2
 )
 
-file = URI.open("https://www.top10berlin.de/sites/top10berlin.de/files/list/2015/11/17/fullsize_sonneundmond_ayurveda_betreiber3.jpg")
+file = URI.open("https://www.epyogaeugene.com/wp-content/uploads/2022/03/postnatal_mum_baby_yoga-1024x576-1.png")
 yoga_class33.photo.attach(io: file, filename: "#{rand(1..1000000)}.png", content_type: "image/png")
 
 yoga_class33.save!
@@ -1359,7 +1359,7 @@ yoga_class34 = YogaClass.new(
   user: user3
 )
 
-file = URI.open("https://www.blackmountainyoga.com/wp-content/uploads/bb-plugin/cache/234-blk-mtn-yoga-day2-1280x855-landscape.jpg")
+file = URI.open("https://www.epyogaeugene.com/wp-content/uploads/2022/03/postnatal_mum_baby_yoga-1024x576-1.png")
 yoga_class34.photo.attach(io: file, filename: "#{rand(1..1000000)}.png", content_type: "image/png")
 
 yoga_class34.save!
